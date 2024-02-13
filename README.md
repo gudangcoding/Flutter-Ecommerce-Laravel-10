@@ -1,6 +1,6 @@
-# coba1
+# Flutter Ecommerce Dan Laravel 10
 
-A new Flutter project.
+Sebuah Aplikasi Flutter Ecommerce Integrasi Laravel Rest Api dan Midtrans.
 
 ## Getting Started
 
