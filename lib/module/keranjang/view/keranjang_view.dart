@@ -10,7 +10,7 @@ class KeranjangView extends StatefulWidget {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 59, 177, 231),
         title: const Text("Keranjang"),
         actions: const [],
       ),
@@ -83,7 +83,7 @@ class KeranjangView extends StatefulWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: const Color.fromARGB(255, 59, 177, 231),
                     ),
                     onPressed: () {},
                     child: const Text(

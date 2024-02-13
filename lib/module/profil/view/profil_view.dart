@@ -14,7 +14,7 @@ class ProfilView extends StatefulWidget {
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 59, 177, 231),
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
@@ -51,7 +51,7 @@ class ProfilView extends StatefulWidget {
                   ),
                   CircleAvatar(
                     radius: 20.0,
-                    backgroundColor: Colors.green,
+                    backgroundColor: Color.fromARGB(255, 59, 177, 231),
                     child: Icon(
                       Icons.camera_alt,
                       color: Colors.white,
@@ -94,7 +94,7 @@ class ProfilView extends StatefulWidget {
               padding: const EdgeInsets.all(12.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: const Color.fromARGB(255, 59, 177, 231),
                 ),
                 onPressed: () {},
                 child: const Text(

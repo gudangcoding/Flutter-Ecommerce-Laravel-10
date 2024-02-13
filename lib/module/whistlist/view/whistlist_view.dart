@@ -9,7 +9,7 @@ class WhistlistView extends StatefulWidget {
     controller.view = this;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 59, 177, 231),
         title: const Text(
           "Whistlist",
           style: TextStyle(

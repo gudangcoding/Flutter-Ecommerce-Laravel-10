@@ -8,6 +8,9 @@ class ProfilController extends State<ProfilView> {
   static late ProfilController instance;
   late ProfilView view;
 
+  File? imageFile;
+  final ImagePicker _imagePicker = ImagePicker();
+
   @override
   void initState() {
     instance = this;
@@ -19,9 +22,6 @@ class ProfilController extends State<ProfilView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
-
-  File? _imageFile;
-  final ImagePicker _imagePicker = ImagePicker();
 
   Future<void> showImagePicker(BuildContext context) async {
     showModalBottomSheet(
@@ -58,8 +58,9 @@ class ProfilController extends State<ProfilView> {
 
       if (pickedFile != null) {
         setState(() {
-          _imageFile = File(pickedFile.path);
+          imageFile = File(pickedFile.path);
         });
+        print(imageFile);
       }
     } catch (e) {
       print('Error picking image: $e');

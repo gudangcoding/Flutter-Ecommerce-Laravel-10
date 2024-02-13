@@ -53,28 +53,28 @@ class _DashboardViewState extends State<DashboardView> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: Colors.green,
+              color: Color.fromARGB(255, 59, 177, 231),
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.favorite,
-              color: Colors.green,
+              color: Color.fromARGB(255, 59, 177, 231),
             ),
             label: 'Wishlist',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.credit_card,
-              color: Colors.green,
+              color: Color.fromARGB(255, 59, 177, 231),
             ),
             label: 'Transaction',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: Colors.green,
+              color: Color.fromARGB(255, 59, 177, 231),
             ),
             label: 'Profile',
           ),

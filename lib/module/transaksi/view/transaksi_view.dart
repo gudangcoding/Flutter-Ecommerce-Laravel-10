@@ -10,96 +10,42 @@ class TransaksiView extends StatefulWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Payment History'),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 16.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.set0();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: controller.currentSegment == 0
-                            ? Colors.green
-                            : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Proses',
-                          style: TextStyle(
-                            color: controller.currentSegment == 0
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 16.0),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      controller.set1();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: controller.currentSegment == 1
-                            ? Colors.green
-                            : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Komplet',
-                          style: TextStyle(
-                            color: controller.currentSegment == 1
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+        backgroundColor: const Color.fromARGB(255, 59, 177, 231),
+        title: const Text(
+          'Transaksi History',
+          style: TextStyle(
+            color: Colors.white,
           ),
-          const SizedBox(height: 16.0),
-          controller.currentSegment == 0
-              ? ListView.builder(
-                  itemCount: processTransactions.length,
-                  itemBuilder: (context, index) {
-                    var transaction = processTransactions[index];
-                    return ListTile(
-                      title: Text('Tanggal order: ${transaction.date}'),
-                      subtitle: Text(
-                          'Nomor Invoice: ${transaction.invoiceNumber}\nStatus: ${transaction.status}'),
-                    );
-                  },
-                )
-              : ListView.builder(
-                  itemCount: processTransactions.length,
-                  itemBuilder: (context, index) {
-                    var transaction = completeTransactions[index];
-                    return ListTile(
-                      title: Text('Tanggal order: ${transaction.date}'),
-                      subtitle: Text(
-                          'Nomor Invoice: ${transaction.invoiceNumber}\nStatus: ${transaction.status}'),
-                    );
-                  },
-                ),
-        ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(10.0),
+        controller: ScrollController(),
+        child: Column(
+          children: [
+            QTextField(
+              label: "",
+              onChanged: (value) {},
+              suffixIcon: Icons.search,
+              hint: "Cari Transaksi",
+            ),
+            ListView.builder(
+              itemCount: controller.produks.length,
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                var item = controller.produks[index];
+                return Card(
+                  child: ListTile(
+                    title: const Text("No Invoice : 123"),
+                    subtitle: Text("Tanggal : ${item["price"]}"),
+                    trailing: const Text("Selesai"),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -108,17 +54,72 @@ class TransaksiView extends StatefulWidget {
   State<TransaksiView> createState() => TransaksiController();
 }
 
-List<Transaction> processTransactions = [
-  Transaction(date: '2024-02-13', invoiceNumber: 'INV12345', status: 'Pending'),
-  Transaction(
-      date: '2024-02-12', invoiceNumber: 'INV12344', status: 'Processing'),
-  // Add more transactions as needed
-];
+class ProductCard extends StatelessWidget {
+  final Map<String, dynamic> product;
 
-List<Transaction> completeTransactions = [
-  Transaction(
-      date: '2024-02-11', invoiceNumber: 'INV12343', status: 'Completed'),
-  Transaction(
-      date: '2024-02-10', invoiceNumber: 'INV12342', status: 'Completed'),
-  // Add more transactions as needed
+  const ProductCard({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            product['imageUrl'],
+            width: double.infinity,
+            height: 150.0,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product['name'],
+                  style: const TextStyle(
+                      fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4.0),
+                Text(
+                  '\$${product['price'].toString()}',
+                  style: const TextStyle(fontSize: 14.0, color: Colors.green),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+final List<Map<String, dynamic>> produk = [
+  {
+    'name': 'Product 1',
+    'imageUrl':
+        'https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg',
+    'price': 19.99,
+  },
+  {
+    'name': 'Product 2',
+    'imageUrl':
+        'https://i.ibb.co/mHtmhmP/photo-1521305916504-4a1121188589-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg',
+    'price': 29.99,
+  },
+  {
+    'name': 'Product 3',
+    'imageUrl':
+        'https://images.unsplash.com/photo-1625869016774-3a92be2ae2cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+    'price': 39.99,
+  },
+  {
+    'name': 'Product 4',
+    'imageUrl':
+        'https://images.unsplash.com/photo-1578160112054-954a67602b88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80',
+    'price': 49.99,
+  },
+  // Add more produks as needed
 ];
