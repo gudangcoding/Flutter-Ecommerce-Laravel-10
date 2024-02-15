@@ -18,7 +18,7 @@ class HomeController extends State<HomeView> {
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
-  List<Map<String, dynamic>> products = [
+  List<Map<String, dynamic>> produkhome = [
     {
       "id": 1,
       "photo":
