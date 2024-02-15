@@ -21,6 +21,13 @@ class DetailprodukController extends State<DetailprodukView> {
   @override
   Widget build(BuildContext context) => widget.build(context, this);
   List<Map<String, dynamic>> cartItems = [];
+  bool isLiked = false;
+  void kliksuka() {
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
+
   void _addToCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

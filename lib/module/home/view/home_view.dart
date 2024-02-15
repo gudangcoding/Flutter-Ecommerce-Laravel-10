@@ -27,15 +27,15 @@ class HomeView extends StatefulWidget {
               Get.to(const KeranjangView());
             },
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.notifications,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Get.to(const NotifikasiView());
-            },
-          ),
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.notifications,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {
+          //     Get.to(const NotifikasiView());
+          //   },
+          // ),
         ],
       ),
       body: SafeArea(

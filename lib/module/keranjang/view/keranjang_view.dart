@@ -38,12 +38,11 @@ class KeranjangView extends StatefulWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child: ListTile(
-                      leading: Checkbox(
-                        value: controller.cartItems[index]['selected'],
-                        onChanged: (value) {
-                          controller.ceklis(index, value);
-                          print(index);
-                        },
+                      leading: Image.network(
+                        "https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg",
+                        width: 50.0,
+                        height: 50.0,
+                        fit: BoxFit.cover,
                       ),
                       title: Text(controller.cartItems[index]['name']),
                       subtitle:
@@ -61,6 +60,12 @@ class KeranjangView extends StatefulWidget {
                             icon: const Icon(Icons.add),
                             onPressed: () =>
                                 controller.incrementQuantity(index),
+                          ),
+                          Checkbox(
+                            value: controller.cartItems[index]['selected'],
+                            onChanged: (value) {
+                              controller.ceklis(index, value);
+                            },
                           ),
                         ],
                       ),

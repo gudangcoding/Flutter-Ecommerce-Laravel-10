@@ -35,17 +35,20 @@ class WhistlistView extends StatefulWidget {
               physics: const ScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 var item = controller.products[index];
-                return Card(
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey[200],
-                      backgroundImage: NetworkImage(
-                        item["photo"],
+                return InkWell(
+                  onTap: () => const DetailprodukView(),
+                  child: Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey[200],
+                        backgroundImage: NetworkImage(
+                          item["photo"],
+                        ),
                       ),
+                      title: Text(item["product_name"]),
+                      subtitle: Text("${item["price"]}"),
+                      trailing: const Icon(Icons.shopping_cart),
                     ),
-                    title: Text(item["product_name"]),
-                    subtitle: Text("${item["price"]}"),
-                    trailing: const Icon(Icons.shopping_cart),
                   ),
                 );
               },

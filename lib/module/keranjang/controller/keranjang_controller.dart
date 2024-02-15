@@ -42,7 +42,8 @@ class KeranjangController extends State<KeranjangView> {
       'name': 'Product ${cartItems.length + 1}',
       'price': 20.0,
       'quantity': 1,
-      'foto': 'path/to/image',
+      'foto':
+          'https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg',
     };
 
     // Periksa apakah produk dengan ID yang sama sudah ada di dalam keranjang belanja
