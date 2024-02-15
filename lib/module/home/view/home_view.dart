@@ -59,7 +59,7 @@ class HomeView extends StatefulWidget {
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             hintText: "Search product",
-                            prefixIcon: Icon(Icons.search),
+                            suffixIcon: Icon(Icons.search),
                           ),
                         ),
                       ),
