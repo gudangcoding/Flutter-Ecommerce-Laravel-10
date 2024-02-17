@@ -3,7 +3,11 @@ import 'package:coba1/core.dart';
 import '../controller/whistlist_controller.dart';
 
 class WhistlistView extends StatefulWidget {
-  const WhistlistView({Key? key}) : super(key: key);
+  final Map<String, dynamic>? product;
+  const WhistlistView({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   Widget build(context, WhistlistController controller) {
     controller.view = this;
@@ -36,7 +40,9 @@ class WhistlistView extends StatefulWidget {
               itemBuilder: (BuildContext context, int index) {
                 var item = controller.products[index];
                 return InkWell(
-                  onTap: () => const DetailprodukView(),
+                  onTap: () => DetailprodukView(
+                    product: product,
+                  ),
                   child: Card(
                     child: ListTile(
                       leading: CircleAvatar(

@@ -31,7 +31,9 @@ class _DashboardViewState extends State<DashboardView> {
 
   final List<Widget> _widgetOptions = <Widget>[
     const HomeView(),
-    const WhistlistView(),
+    const WhistlistView(
+      product: {},
+    ),
     const TransaksiView(),
     const ProfilView(),
   ];

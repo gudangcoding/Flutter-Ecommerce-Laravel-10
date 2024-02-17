@@ -90,13 +90,13 @@ class HomeView extends StatefulWidget {
                   autoPlayInterval: const Duration(seconds: 3),
                   enlargeCenterPage: true,
                 ),
-                items: controller.produkhome.map((item) {
+                items: controller.produk.map((item) {
                   return Container(
                     decoration: BoxDecoration(
                       // Gunakan BoxDecoration untuk menetapkan gambar latar belakang
                       image: DecorationImage(
                         image: NetworkImage(
-                            item['photo']), // Ambil URL gambar dari produkhome
+                            item['gambar']), // Ambil URL gambar dari produkhome
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -125,9 +125,9 @@ class HomeView extends StatefulWidget {
                     crossAxisSpacing: 8.0,
                     mainAxisSpacing: 8.0,
                   ),
-                  itemCount: controller.produkhome.length,
+                  itemCount: controller.produk.length,
                   itemBuilder: (context, index) {
-                    var item = controller.produkhome[index];
+                    var item = controller.produk[index];
                     return ProductCard(product: item);
                   },
                 ),

@@ -3,7 +3,11 @@ import 'package:coba1/core.dart';
 import '../controller/detailproduk_controller.dart';
 
 class DetailprodukView extends StatefulWidget {
-  const DetailprodukView({Key? key}) : super(key: key);
+  final Map<String, dynamic>? product;
+  const DetailprodukView({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   Widget build(context, DetailprodukController controller) {
     controller.view = this;
@@ -30,23 +34,23 @@ class DetailprodukView extends StatefulWidget {
                 children: [
                   // Foto Produk
                   Image.network(
-                    'https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg',
+                    '${controller.gambar}',
                     height: 200.0,
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(height: 16.0),
                   // Nama dan Harga Produk
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Nama Produk',
-                        style: TextStyle(
+                        '${controller.namabarang}',
+                        style: const TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Rp 20.00',
-                        style: TextStyle(
+                        'R${controller.harga}',
+                        style: const TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -71,9 +75,9 @@ class DetailprodukView extends StatefulWidget {
                     ],
                   ),
                   // Keterangan Produk
-                  const Text(
-                    'Deskripsi produk lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    style: TextStyle(fontSize: 16.0),
+                  Text(
+                    '${controller.keterangan}',
+                    style: const TextStyle(fontSize: 16.0),
                   ),
                   const SizedBox(height: 16.0),
                 ],

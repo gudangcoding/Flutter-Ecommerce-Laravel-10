@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:coba1/core.dart';
 import '../view/detailproduk_view.dart';
@@ -13,6 +12,14 @@ class DetailprodukController extends State<DetailprodukView> {
   void initState() {
     instance = this;
     super.initState();
+    if (widget.product != null) {
+      gambar = widget.product?['gambar'];
+      namabarang = widget.product?['nama_barang'];
+      keterangan = widget.product?['keterangan'];
+      String? hargaString = widget.product!['harga'].toString();
+      harga = double.tryParse(hargaString ?? '');
+    }
+    print(widget.product);
   }
 
   @override
@@ -20,6 +27,12 @@ class DetailprodukController extends State<DetailprodukView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  String? gambar;
+  String? namabarang;
+  double? harga;
+  String? keterangan;
+
   List<Map<String, dynamic>> cartItems = [];
   bool isLiked = false;
   void kliksuka() {

@@ -15,61 +15,67 @@ class LoginView extends StatefulWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 100.0,
-              ),
-              Image.asset(
-                "assets/welcome.png",
-                width: 120.0,
-                height: 120.0,
-                fit: BoxFit.fill,
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              QTextField(
-                  label: "Email",
-                  onChanged: (value) {
-                    controller.email = value;
-                  }),
-              QTextField(
-                  label: "Password",
-                  obscure: true,
-                  onChanged: (value) {
-                    controller.password = value;
-                  }),
-              Container(
-                height: 72,
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(12.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 59, 177, 231),
-                  ),
-                  onPressed: () {
-                    controller.cekLogin();
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
+          //validator harus dibungkus form
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 100.0,
+                ),
+                Image.asset(
+                  "assets/welcome.png",
+                  width: 120.0,
+                  height: 120.0,
+                  fit: BoxFit.fill,
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                QTextField(
+                    label: "Email",
+                    validator: Validator.email,
+                    onChanged: (value) {
+                      controller.email = value;
+                    }),
+                QTextField(
+                    label: "Password",
+                    validator: Validator.required,
+                    obscure: true,
+                    onChanged: (value) {
+                      controller.password = value;
+                    }),
+                Container(
+                  height: 72,
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.all(12.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 59, 177, 231),
+                    ),
+                    onPressed: () {
+                      controller.cekLogin();
+                    },
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Belum punya akun?"),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(const DaftarView());
-                    },
-                    child: const Text("Klik disini"),
-                  ),
-                ],
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Belum punya akun?"),
+                    TextButton(
+                      onPressed: () {
+                        Get.to(const DaftarView());
+                      },
+                      child: const Text("Klik disini"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

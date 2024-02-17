@@ -21,19 +21,26 @@ class LoginController extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
-
+  //form_key
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String email = "";
   String password = "";
   final apiService = ApiService();
   final storage = Storage();
 // final hasil<String,dynamic> =[];
-
+  // List data = [];
   void cekLogin() async {
+    //form_validate
+    bool isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
     final postData = {
       'email': email,
       'password': password,
     };
     Map hasil = await apiService.post('user/login', postData);
+    // data = hasil['data'];
     print(hasil['data']['success']);
 
     Storage().set('user', hasil['data']);

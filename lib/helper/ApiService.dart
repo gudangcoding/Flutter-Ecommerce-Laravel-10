@@ -31,10 +31,7 @@ class ApiService {
     return handleResponse(response);
   }
 
-  Future<Map<String, dynamic>> getWithToken(
-    String path,
-    String token,
-  ) async {
+  Future<Map<String, dynamic>> getWithToken(String path) async {
     var token = await Storage().get('token');
     var response = await Dio().get(
       "https://reqres.in/api/users",
@@ -52,7 +49,6 @@ class ApiService {
   Future<Map<String, dynamic>> postWithToken(
     String path,
     Map<String, dynamic> body,
-    String token,
   ) async {
     var token = await Storage().get('token');
     var response = await Dio().post(baseUrl + path,

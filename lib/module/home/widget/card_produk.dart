@@ -9,14 +9,16 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(const DetailprodukView()),
+      onTap: () => Get.to(DetailprodukView(
+        product: product,
+      )),
       child: Card(
         elevation: 3.0,
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              product["photo"],
+              product["gambar"],
               height: 120.0,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -30,10 +32,10 @@ class ProductCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        product["product_name"],
+                        product["nama_barang"],
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text('Rp ${product["price"].toStringAsFixed(2)}'),
+                      Text('Rp ${product["harga"].toStringAsFixed(0)}'),
                     ],
                   ),
                   const Column(
