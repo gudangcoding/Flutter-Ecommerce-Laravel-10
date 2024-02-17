@@ -27,16 +27,16 @@ class LoginController extends State<LoginView> {
   final apiService = ApiService();
   final storage = Storage();
 // final hasil<String,dynamic> =[];
+
   void cekLogin() async {
     final postData = {
       'email': email,
       'password': password,
     };
-    final Map<String, dynamic> hasil = await apiService.post(
-      'user/login',
-      postData,
-    );
-    Storage().set('user', hasil['data']['data']);
+    Map hasil = await apiService.post('user/login', postData);
+    print(hasil['data']['success']);
+
+    Storage().set('user', hasil['data']);
     bool? success = hasil['data']['success'];
     var user = await Storage().get('user');
     // Menampilkan nilai 'user'
@@ -50,6 +50,6 @@ class LoginController extends State<LoginView> {
         message: 'Login Gagal, Cek Email atau password.',
       );
     }
-    print(hasil['data']['data']);
+    print(success);
   }
 }
