@@ -29,9 +29,17 @@ class LoginView extends StatefulWidget {
               const SizedBox(
                 height: 10.0,
               ),
-              QTextField(label: "Email", onChanged: (value) {}),
               QTextField(
-                  label: "Password", obscure: true, onChanged: (value) {}),
+                  label: "Email",
+                  onChanged: (value) {
+                    controller.email = value;
+                  }),
+              QTextField(
+                  label: "Password",
+                  obscure: true,
+                  onChanged: (value) {
+                    controller.password = value;
+                  }),
               Container(
                 height: 72,
                 width: MediaQuery.of(context).size.width,
@@ -41,7 +49,7 @@ class LoginView extends StatefulWidget {
                     backgroundColor: const Color.fromARGB(255, 59, 177, 231),
                   ),
                   onPressed: () {
-                    Get.offAll(const DashboardView());
+                    controller.cekLogin();
                   },
                   child: const Text(
                     "Login",

@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:coba1/shared_widget/q_dropdown.dart';
+import 'package:coba1/shared_widget/textarea.dart';
 import 'package:flutter/material.dart';
 import 'package:coba1/core.dart';
 import '../controller/profil_controller.dart';
@@ -26,7 +28,9 @@ class ProfilView extends StatefulWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.logout();
+            },
             icon: const Icon(
               Icons.logout,
               size: 24.0,
@@ -34,7 +38,7 @@ class ProfilView extends StatefulWidget {
           ),
         ],
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,8 +50,7 @@ class ProfilView extends StatefulWidget {
                 children: [
                   CircleAvatar(
                     radius: 60.0,
-                    backgroundImage: AssetImage(
-                        'assets/no-image.png'), // Ganti dengan path atau URL gambar profil
+                    backgroundImage: AssetImage('assets/no-image.png'),
                   ),
                   CircleAvatar(
                     radius: 20.0,
@@ -61,31 +64,54 @@ class ProfilView extends StatefulWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Nama',
-              ),
+            QTextField(
+              label: "Nama",
+              value: controller.nama,
+              onChanged: (value) {
+                controller.nama = value;
+              },
             ),
             const SizedBox(height: 16.0),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
-              keyboardType: TextInputType.emailAddress,
+            QTextField(
+              label: "Email",
+              value: controller.email,
+              onChanged: (value) {
+                controller.email = value;
+              },
             ),
             const SizedBox(height: 16.0),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Password Lama',
-              ),
-              obscureText: true,
+            QTextField(
+              label: "No Hp",
+              value: controller.nohp,
+              onChanged: (value) {
+                controller.nohp = value;
+              },
             ),
             const SizedBox(height: 16.0),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Password Baru',
-              ),
-              obscureText: true,
+            QTextField(
+              label: "Alamat",
+              value: controller.alamat,
+              onChanged: (value) {
+                controller.alamat = value;
+              },
+            ),
+            const SizedBox(height: 16.0),
+            QTextField(
+              label: "Password Lama",
+              obscure: true,
+              value: controller.password_lama,
+              onChanged: (value) {
+                controller.email = value;
+              },
+            ),
+            const SizedBox(height: 16.0),
+            QTextField(
+              label: "Password Baaru",
+              obscure: true,
+              value: controller.password_baru,
+              onChanged: (value) {
+                controller.email = value;
+              },
             ),
             const SizedBox(height: 16.0),
             Container(
@@ -96,9 +122,11 @@ class ProfilView extends StatefulWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 59, 177, 231),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  controller.edit_profil();
+                },
                 child: const Text(
-                  "Update",
+                  "Update Profil",
                   style: TextStyle(
                     color: Colors.white,
                   ),

@@ -9,7 +9,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => const DetailprodukView(),
+      onTap: () => Get.to(const DetailprodukView()),
       child: Card(
         elevation: 3.0,
         child: Column(
