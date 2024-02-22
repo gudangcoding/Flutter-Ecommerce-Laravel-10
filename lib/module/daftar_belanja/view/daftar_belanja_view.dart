@@ -23,17 +23,22 @@ class DaftarBelanjaView extends StatefulWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueGrey,
+                    backgroundColor: const Color.fromARGB(255, 79, 170, 216),
                   ),
                   onPressed: () {
                     Get.to(
                       const PembayaranView(
-                        token: '3be25d8b-216b-4bbd-bac0-1e13b15da800',
-                        client_key: 'SB-Mid-client-MhvyXioACTyrI6-U',
+                        token: '',
+                        client_key: '',
                       ),
                     );
                   },
-                  child: const Text("Checkout"),
+                  child: const Text(
+                    "Checkout",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],

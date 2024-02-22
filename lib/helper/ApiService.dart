@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:coba1/core.dart';
 import 'package:coba1/helper/storage.dart';
 import 'package:dio/dio.dart';
 
@@ -9,7 +10,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> get(String path) async {
     var response = await Dio().get(
-      baseUrl + path,
+      AppConfig.baseUrl + path,
       options: Options(
         headers: {
           "Content-Type": "application/json",

@@ -25,3 +25,5 @@ flutter pub upgrade --major-versions
 
 midtrans 
 https://pub.dev/packages/midtrans_snap
+//simulator pembayaran
+https://simulator.sandbox.midtrans.com/bca/va/payment

@@ -3,6 +3,7 @@ We believe, the class name must be unique.
 If there is a conflicting class name in this file,
 it means you have to rename it to something more unique.
 */
+export 'package:coba1/config.dart';
 export 'package:coba1/helper/ApiService.dart';
 export 'package:coba1/helper/storage.dart';
 export 'package:coba1/module/daftar/controller/daftar_controller.dart';
