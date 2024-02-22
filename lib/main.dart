@@ -1,10 +1,11 @@
+import 'package:coba1/core.dart';
 import 'package:flutter/material.dart';
 import 'package:coba1/helper/storage.dart';
 import 'package:coba1/module/dashboard/view/dashboard_view.dart';
 import 'package:coba1/module/welcome/view/welcome_view.dart';
 import 'package:coba1/state_util.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

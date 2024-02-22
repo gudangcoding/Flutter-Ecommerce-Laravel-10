@@ -26,6 +26,6 @@ class HomeController extends State<HomeView> {
     setState(() {
       produk = List<Map<String, dynamic>>.from(produkData);
     });
-    print(produk);
+    // print(produk);
   }
 }

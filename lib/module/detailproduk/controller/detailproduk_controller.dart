@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:coba1/helper/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:coba1/core.dart';
 import '../view/detailproduk_view.dart';
@@ -13,6 +14,7 @@ class DetailprodukController extends State<DetailprodukView> {
     instance = this;
     super.initState();
     if (widget.product != null) {
+      id = widget.product?['id'];
       gambar = widget.product?['gambar'];
       namabarang = widget.product?['nama_barang'];
       keterangan = widget.product?['keterangan'];
@@ -20,6 +22,7 @@ class DetailprodukController extends State<DetailprodukView> {
       harga = double.tryParse(hargaString ?? '');
     }
     print(widget.product);
+    loadCartItems();
   }
 
   @override
@@ -28,35 +31,51 @@ class DetailprodukController extends State<DetailprodukView> {
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
+  int? id;
   String? gambar;
   String? namabarang;
   double? harga;
   String? keterangan;
 
   List<Map<String, dynamic>> cartItems = [];
+
   bool isLiked = false;
+
   void kliksuka() {
     setState(() {
       isLiked = !isLiked;
     });
   }
 
-  void _addToCart() async {
+  Future<void> loadCartItems() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? cartJson =
+        prefs.getString('cartItems'); // Membaca data dari SharedPreferences
+    if (cartJson != null) {
+      // Jika data tidak null, konversi menjadi list
+      List<dynamic> decodedCart = jsonDecode(cartJson);
+      cartItems = decodedCart.cast<Map<String, dynamic>>();
+    }
+    print(cartItems);
+  }
 
+  void addToCart() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // var cartItems = await Storage().get('cartItems');
     // Simulasi data produk yang akan ditambahkan
     Map<String, dynamic> newProduct = {
-      'id': cartItems.length + 1,
-      'name': 'Product ${cartItems.length + 1}',
-      'price': 20.0,
+      'id': id,
+      'name': namabarang,
+      'price': harga,
       'quantity': 1,
-      'foto': 'path/to/image',
+      'foto': gambar,
     };
 
     // Periksa apakah produk dengan ID yang sama sudah ada di dalam keranjang belanja
-    int existingProductIndex =
-        cartItems.indexWhere((item) => item['id'] == newProduct['id']);
-
+    // int existingProductIndex = cartItems.indexWhere((item) => item['id'] == id);
+    int existingProductIndex = cartItems.indexWhere((item) => item['id'] == id);
+    // print(existingProductIndex);
+    // return;
     if (existingProductIndex != -1) {
       // Jika produk sudah ada, tambahkan jumlahnya
       setState(() {
@@ -68,8 +87,9 @@ class DetailprodukController extends State<DetailprodukView> {
         cartItems.add(newProduct);
       });
     }
-
     // Simpan daftar keranjang belanja ke shared preferences
     prefs.setString('cartItems', jsonEncode(cartItems));
+    var cart = await Storage().get('cartItems');
+    print(cart);
   }
 }

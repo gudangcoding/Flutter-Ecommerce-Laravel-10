@@ -1,37 +1,36 @@
 import 'dart:convert';
 
+import 'package:coba1/helper/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:coba1/core.dart';
 import '../view/keranjang_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dio/dio.dart';
 
 class KeranjangController extends State<KeranjangView> {
   static late KeranjangController instance;
   late KeranjangView view;
-
-  List<Map<String, dynamic>> cartItems = [
-    {'name': 'Item 1', 'price': 10, 'quantity': 1, 'selected': false},
-    {'name': 'Item 2', 'price': 20, 'quantity': 1, 'selected': false},
-    {'name': 'Item 3', 'price': 30, 'quantity': 1, 'selected': false}
-  ];
-
+  List<Map<String, dynamic>> cartItems = [];
   @override
   void initState() {
     instance = this;
     super.initState();
-    // _loadCartItems();
+    loadCartItems();
   }
 
-  // void _loadCartItems() async {
-  //   var prefs = await SharedPreferences.getInstance();
-  //   String? cartItemsJson = prefs.getString('cartItems');
-
-  //   if (cartItemsJson.isNotEmpty) {
-  //     setState(() {
-  //       cartItems = jsonDecode(cartItemsJson!).cast<Map<String, dynamic>>();
-  //     });
-  //   }
-  // }
+  Future<void> loadCartItems() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? cartJson =
+        prefs.getString('cartItems'); // Membaca data dari SharedPreferences
+    if (cartJson != null) {
+      // Jika data tidak null, konversi menjadi list
+      List<dynamic> decodedCart = jsonDecode(cartJson);
+      cartItems = decodedCart.cast<Map<String, dynamic>>();
+      setState(() {});
+    }
+    print('ini total di keranjang ${cartItems.length}');
+    print(cartItems);
+  }
 
   void _addToCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -77,8 +76,6 @@ class KeranjangController extends State<KeranjangView> {
     setState(() {});
   }
 
-  // List<Map<String, dynamic>> cartItems = [];
-
   bool selectAll = false;
   bool isSelected = false;
 
@@ -109,10 +106,20 @@ class KeranjangController extends State<KeranjangView> {
   }
 
   double calculateTotal() {
+    // double total = 0;
+    // for (var item in cartItems) {
+    //   if (item['selected']) {
+    //     total += (item['price'] ?? 0) * (item['quantity'] ?? 0);
+    //   }
+    // }
+    // return total;
     double total = 0;
     for (var item in cartItems) {
-      if (item['selected']) {
-        total += (item['price'] ?? 0) * (item['quantity'] ?? 0);
+      // Periksa apakah 'selected', 'price', dan 'quantity' memiliki nilai yang valid
+      if (item['selected'] != null &&
+          item['price'] != null &&
+          item['quantity'] != null) {
+        total += (item['selected'] ? (item['price'] * item['quantity']) : 0);
       }
     }
     return total;
@@ -145,6 +152,28 @@ class KeranjangController extends State<KeranjangView> {
           content: Text('Produk berhasil dihapus.'),
         ),
       );
+    }
+  }
+
+  void checkout() async {
+    String? cartJson = await Storage().get('cartItems');
+
+    if (cartJson != null) {
+      List<dynamic> decodedCart = jsonDecode(cartJson);
+      List<Map<String, dynamic>> cartItems =
+          decodedCart.cast<Map<String, dynamic>>();
+
+      var body = {
+        "items": cartItems,
+        "jumlah_harga": 600000,
+        "jumlah_barang": 5,
+        "user_id": 11
+      };
+
+      var hasil = await ApiService().postWithToken("order/store", body);
+      print(hasil);
+    } else {
+      print('Cart is empty!');
     }
   }
 }

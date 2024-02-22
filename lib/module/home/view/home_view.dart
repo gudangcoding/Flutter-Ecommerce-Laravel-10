@@ -107,14 +107,16 @@ class HomeView extends StatefulWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              const SizedBox(
-                height: 50.0,
-                child: Text(
-                  "Produk Terbaru",
-                  textAlign: TextAlign.left, // Tambahkan properti textAlign
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
+              const Expanded(
+                child: SizedBox(
+                  height: 50.0,
+                  child: Text(
+                    "Produk Terbaru",
+                    textAlign: TextAlign.left, // Tambahkan properti textAlign
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

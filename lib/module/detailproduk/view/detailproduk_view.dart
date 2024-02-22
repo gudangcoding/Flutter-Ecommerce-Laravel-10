@@ -93,7 +93,7 @@ class DetailprodukView extends StatefulWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 59, 177, 231),
               ),
-              onPressed: () {},
+              onPressed: () => controller.addToCart(),
               child: const Text(
                 "Beli Produk Ini",
                 style: TextStyle(

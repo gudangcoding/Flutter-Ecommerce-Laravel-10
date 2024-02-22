@@ -1,0 +1,27 @@
+Lakukan ini jika project Flutter kamu Rusak
+
+Opsi 1
+
+flutter clean
+delete .\pubspec.lock
+delete .\lib\generated_plugin_registrant.dart 
+flutter pub get --verbose
+
+
+Opsi 2
+
+flutter clean
+delete .\pubspec.lock
+delete .\lib\generated_plugin_registrant.dart 
+rd -r .\android\
+flutter create .
+flutter pub get --verbose
+
+
+Opsi 3
+
+flutter clean
+flutter pub upgrade --major-versions
+
+midtrans 
+https://pub.dev/packages/midtrans_snap

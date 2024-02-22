@@ -34,7 +34,7 @@ class _DashboardViewState extends State<DashboardView> {
     const WhistlistView(
       product: {},
     ),
-    const TransaksiView(),
+    const DaftarBelanjaView(),
     const ProfilView(),
   ];
 

@@ -36,17 +36,17 @@ class KeranjangView extends StatefulWidget {
               child: ListView.builder(
                 itemCount: controller.cartItems.length,
                 itemBuilder: (BuildContext context, int index) {
+                  var item = controller.cartItems[index];
                   return Card(
                     child: ListTile(
                       leading: Image.network(
-                        "https://i.ibb.co/dG68KJM/photo-1513104890138-7c749659a591-crop-entropy-cs-tinysrgb-fit-max-fm-jpg-ixid-Mnwy-ODA4-ODh8-MHwxf-H.jpg",
+                        item['foto'],
                         width: 50.0,
                         height: 50.0,
                         fit: BoxFit.cover,
                       ),
-                      title: Text(controller.cartItems[index]['name']),
-                      subtitle:
-                          Text('Rp ${controller.cartItems[index]['price']}'),
+                      title: Text(item['name']),
+                      subtitle: Text('Rp ${item['price']}'),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -55,14 +55,15 @@ class KeranjangView extends StatefulWidget {
                             onPressed: () =>
                                 controller.decrementQuantity(index),
                           ),
-                          Text('${controller.cartItems[index]['quantity']}'),
+                          Text('${item['quantity']}'),
                           IconButton(
                             icon: const Icon(Icons.add),
                             onPressed: () =>
                                 controller.incrementQuantity(index),
                           ),
                           Checkbox(
-                            value: controller.cartItems[index]['selected'],
+                            value: controller.cartItems[index]['selected'] ??
+                                false,
                             onChanged: (value) {
                               controller.ceklis(index, value);
                             },
@@ -90,7 +91,7 @@ class KeranjangView extends StatefulWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 59, 177, 231),
                     ),
-                    onPressed: () {},
+                    onPressed: () => controller.checkout(),
                     child: const Text(
                       "Checkout",
                       style: TextStyle(

@@ -16,8 +16,13 @@ class Storage {
 
   Future<String?> get(String key) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-
     return pref.getString(key);
+  }
+
+  Future<String?> get2(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? response = prefs.getString(key);
+    return jsonDecode(response!);
   }
 
   Future setUserID(int value) async {

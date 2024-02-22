@@ -6,12 +6,13 @@
         "dashboard",
         "home",
         "whistlist",
-        "transaksi",
         "pencarian",
         "keranjang",
         "profil",
         "detailproduk",
-        "notifikasi"
+        "notifikasi",
+        "daftar_belanja",
+        "pembayaran"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,
